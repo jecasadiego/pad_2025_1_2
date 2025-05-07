@@ -1,0 +1,2 @@
+[console_scripts]
+edu-pad-run = edu_pad.static.main:run

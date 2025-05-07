@@ -2,17 +2,18 @@ from setuptools import setup, find_packages
 
 setup(
     name='edu_pad',
-    version='0.0.1',
-    author='Juan Casadiego',
-    author_email='juanescasa24@hotmail.com',
-    description='A package for educational purposes',
-    py_modules=['actividad1', 'actividad2'],
+    version='0.1',
+    description='Scraper de libros con almacenamiento en CSV',
+    author='Juan Esteban Casadiego',
+    packages=find_packages(where='src'),
+    package_dir={'': 'src'},
     install_requires=[
-        'pandas',
-        'openpyxl',
-        'numpy',
         'requests',
-        'beautifulsoup4',
-        'pymongo'
-    ]
+        'beautifulsoup4'
+    ],
+    entry_points={
+        'console_scripts': [
+            'edu-pad-run=edu_pad.static.main:run'
+        ]
+    },
 )

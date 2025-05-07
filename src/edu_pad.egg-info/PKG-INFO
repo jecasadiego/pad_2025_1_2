@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: edu_pad
+Version: 0.1
+Summary: Scraper de libros con almacenamiento en CSV
+Author: Juan Esteban Casadiego
+License-File: LICENSE
+Requires-Dist: requests
+Requires-Dist: beautifulsoup4
+Dynamic: author
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
