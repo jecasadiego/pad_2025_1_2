@@ -6,14 +6,13 @@ Este proyecto permite extraer información comercial (título, precio, disponibi
 
 ## 🚀 Instalación y configuración
 
-### 1. Clona el repositorio
+### 1. Clona el repositorio y accede a su carpeta
 
 ```bash
 git clone https://github.com/jecasadiego/pad_2025_1_2.git
-cd edu_pad
 ```
 
-### 2. Crea y activa un entorno virtual
+### 2. Crea y activa un entorno virtual dentro de pad_2025_1_2
 
 **Windows:**
 
