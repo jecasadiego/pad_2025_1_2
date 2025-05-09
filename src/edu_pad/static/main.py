@@ -1,26 +1,34 @@
-# ✅ Correcto
-from edu_pad.functions.scraper import fetch_books_from_page
-from edu_pad.db.db import save_to_csv
+from edu_pad.functions.scraper import (
+    scrape_with_bs4,
+    scrape_with_selenium,
+    show_scrapy_instruction
+)
 
+def run():
+    print("=== MÉTODOS DE SCRAPING DISPONIBLES ===")
+    print("1. BeautifulSoup")
+    print("2. Selenium")
+    print("3. Scrapy")
+    choice = input("Selecciona el método (1-3): ").strip()
 
-def main_run(total_pages: int):
-    all_books = []
-    for page in range(1, total_pages + 1):
-        print(f"🔎 Procesando página {page}...")
-        books = fetch_books_from_page(page)
-        all_books.extend(books)
+    if choice in ["1", "2"]:
+        try:
+            pages = int(input("¿Cuántas páginas quieres scrapear? (1-50): ").strip())
+            if not 1 <= pages <= 50:
+                raise ValueError()
+        except ValueError:
+            print("❌ Número inválido.")
+            return
 
-    save_to_csv(all_books)
+        if choice == "1":
+            scrape_with_bs4(pages)
+        elif choice == "2":
+            scrape_with_selenium(pages)
 
-def run():  # Esta es la que setup.py debe apuntar
-    try:
-        pages = int(input("¿Cuántas páginas quieres scrapear? (Máximo 50): ").strip())
-        if 1 <= pages <= 50:
-            main_run(pages)
-        else:
-            print("❌ Número de páginas fuera de rango.")
-    except ValueError:
-        print("❌ Debes ingresar un número entero válido.")
+    elif choice == "3":
+        show_scrapy_instruction()
+    else:
+        print("❌ Opción no válida.")
 
 if __name__ == "__main__":
     run()

@@ -1,21 +1,40 @@
-import csv
 import os
-from typing import List, Dict
+import csv
+import sqlite3
 
-CSV_FILE = "books_data.csv"
+# Ruta absoluta a la carpeta actual del archivo
+BASE_PATH = os.path.abspath(os.path.dirname(__file__))
+CSV_PATH = os.path.join(BASE_PATH, 'books_data.csv')
+DB_PATH = os.path.join(BASE_PATH, 'books_data.sqlite')
 
 
-def save_to_csv(data: List[Dict]):
-    if not data:
-        print("⚠️ No hay libros para guardar.")
-        return
-
-    file_exists = os.path.isfile(CSV_FILE)
-
-    with open(CSV_FILE, mode='a', newline='', encoding='utf-8') as file:
-        writer = csv.DictWriter(file, fieldnames=data[0].keys())
+def save_to_csv(data):
+    os.makedirs(BASE_PATH, exist_ok=True)  # 🔒 crea la carpeta si no existe
+    file_exists = os.path.isfile(CSV_PATH)
+    with open(CSV_PATH, mode='a', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=data[0].keys())
         if not file_exists:
             writer.writeheader()
         writer.writerows(data)
 
-    print(f"✅ {len(data)} libros guardados en '{CSV_FILE}'")
+
+def save_to_sqlite(data):
+    os.makedirs(BASE_PATH, exist_ok=True)  # 🔒 asegura existencia
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS books (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT,
+            price REAL,
+            availability TEXT,
+            rating TEXT
+        )
+    ''')
+    for book in data:
+        cursor.execute('''
+            INSERT INTO books (title, price, availability, rating)
+            VALUES (?, ?, ?, ?)
+        ''', (book['title'], book['price'], book['availability'], book['rating']))
+    conn.commit()
+    conn.close()
