@@ -1,12 +1,21 @@
 Metadata-Version: 2.4
 Name: edu_pad
-Version: 0.1
-Summary: Scraper de libros con almacenamiento en CSV
+Version: 0.1.0
+Summary: Scraper de libros con almacenamiento en CSV y SQLite
 Author: Juan Esteban Casadiego
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
 License-File: LICENSE
 Requires-Dist: requests
 Requires-Dist: beautifulsoup4
+Requires-Dist: selenium
+Requires-Dist: webdriver-manager
+Requires-Dist: tqdm
+Requires-Dist: scrapy
 Dynamic: author
+Dynamic: classifier
 Dynamic: license-file
 Dynamic: requires-dist
+Dynamic: requires-python
 Dynamic: summary
