@@ -1,4 +1,4 @@
-Metadata-Version: 2.4
+Metadata-Version: 2.2
 Name: edu_pad
 Version: 0.1.0
 Summary: Scraper de libros con almacenamiento en CSV y SQLite
@@ -15,7 +15,6 @@ Requires-Dist: tqdm
 Requires-Dist: scrapy
 Dynamic: author
 Dynamic: classifier
-Dynamic: license-file
 Dynamic: requires-dist
 Dynamic: requires-python
 Dynamic: summary
