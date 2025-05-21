@@ -30,14 +30,16 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add src/edu_pad/db/*.csv src/edu_pad/db/*.sqlite
+          git fetch origin main
+          git checkout main
+          git pull --rebase origin main
+          git add -f src/edu_pad/db/*.csv src/edu_pad/db/*.sqlite
           if ! git diff --cached --quiet; then
             git commit -m "chore: add scraped data"
-            git push
+            git push origin main
           else
             echo "✅ No hay cambios para hacer commit."
           fi
-
       - name: Upload scraped data as artifact (opcional)
         uses: actions/upload-artifact@v4
         with:
