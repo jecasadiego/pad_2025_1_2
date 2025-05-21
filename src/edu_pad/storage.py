@@ -5,9 +5,11 @@ import sqlite3
 class Storage:
     def __init__(self, base_path: str = None):
         self.base_path = base_path or os.path.abspath(os.path.dirname(__file__))
-        self.csv_path = os.path.join(self.base_path, '..', 'books_data.csv')
-        self.db_path = os.path.join(self.base_path, '..', 'books_data.sqlite')
-        os.makedirs(os.path.dirname(self.csv_path), exist_ok=True)
+        self.db_dir = os.path.join(self.base_path, 'db')
+        self.csv_path = os.path.join(self.db_dir, 'books_data.csv')
+        self.db_path = os.path.join(self.db_dir, 'books_data.sqlite')
+
+        os.makedirs(self.db_dir, exist_ok=True)  # ✅ crea carpeta db/
 
     def save_to_csv(self, data):
         file_exists = os.path.isfile(self.csv_path)
