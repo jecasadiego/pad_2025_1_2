@@ -32,11 +32,12 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git fetch origin main
           git checkout main
-          git pull --rebase origin main
           git add -f src/edu_pad/db/*.csv src/edu_pad/db/*.sqlite
           if ! git diff --cached --quiet; then
             git commit -m "chore: add scraped data"
+            git pull --rebase origin main
             git push origin main
+
           else
             echo "✅ No hay cambios para hacer commit."
           fi
