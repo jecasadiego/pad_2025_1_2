@@ -22,13 +22,24 @@ jobs:
           pip install requests
           pip install beautifulsoup4
           pip install tqdm
-          
       - name: Run scraper
         run: |
           echo -e "1\n1" | python src/edu_pad/main.py
 
-      - name: Upload scraped data
+      - name: Commit generated files if changed
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add src/edu_pad/db/*.csv src/edu_pad/db/*.sqlite
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: add scraped data"
+            git push
+          else
+            echo "✅ No hay cambios para hacer commit."
+
+      - name: Upload scraped data as artifact (opcional)
         uses: actions/upload-artifact@v4
         with:
-          name: scraped-data
-          path: src/edu_pad/static/
+          name: scraped-database
+          path: src/edu_pad/db/      
+
