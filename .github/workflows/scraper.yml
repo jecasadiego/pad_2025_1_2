@@ -40,9 +40,7 @@ jobs:
           git add -f src/edu_pad/db/*.csv src/edu_pad/db/*.sqlite
           if ! git diff --cached --quiet; then
             git commit -m "chore: add scraped ${{ steps.set_pages.outputs.pages }} pages"
-            git pull --rebase origin main
             git push origin main --force
-
           else
             echo "✅ No hay cambios para hacer commit."
           fi
