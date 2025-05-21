@@ -36,6 +36,7 @@ jobs:
             git push
           else
             echo "✅ No hay cambios para hacer commit."
+          fi
 
       - name: Upload scraped data as artifact (opcional)
         uses: actions/upload-artifact@v4
