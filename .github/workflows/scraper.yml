@@ -41,7 +41,7 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "chore: add scraped ${{ steps.set_pages.outputs.pages }} pages"
             git pull --rebase origin main
-            git push origin main
+            git push origin main --force
 
           else
             echo "✅ No hay cambios para hacer commit."
